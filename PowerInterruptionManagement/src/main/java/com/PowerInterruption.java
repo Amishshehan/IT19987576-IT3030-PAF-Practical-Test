@@ -75,7 +75,7 @@ public class PowerInterruption {
 		}
 			// Prepare the html table to be displayed
 			output = "<table class=' table table-sm table-bordered table-white text-nowrap table-hover' >"
-					+ "<thead class='thead-dark'>"
+					+ "<thead class='thead-light'>"
 						+ "<tr>"
 							+ "<th>Customer Name</th>"
 							+ "<th>Phone Number</th>" 
@@ -113,7 +113,7 @@ public class PowerInterruption {
 				
 				
 			// buttons							
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary' data-itemid='" + inquiryID + "'></td>"
+				output += "<td><input name='btnUpdate' type='button' value='Update ' class='btnUpdate btn btn-secondary' data-itemid='" + inquiryID + "'></td>"
 						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='" + inquiryID + "'></td></tr>";
 					
 			}
