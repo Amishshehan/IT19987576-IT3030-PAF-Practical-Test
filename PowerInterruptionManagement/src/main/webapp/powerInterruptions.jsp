@@ -34,7 +34,7 @@ function resetForm() {
 				  </div>
 				</nav>
 			<div class="row col-9 mx-2 my-5">
-				<div class="col-2 shadow-lg p-3 mb-5 bg-white rounded col-md-5 offset-md-5" >
+				<div class="col-2 shadow-lg p-3 mb-5 bg-white rounded col-md-5 offset-md-5 " >
 				
 					<h2 class="text-center mt-3 mb-3">Power Interruption Management </h2>
 					
@@ -71,12 +71,12 @@ function resetForm() {
 						 
 						 
 						  <div class="container">
-							  <div class="row mb-2">
-							    <div class="col">
-							    	<input type="button" value="Clear" class="btn btn-sm btn-secondary btn-block mt-3 " onclick="resetForm();">
+							  <div class="row mt-3 mb-3">
+							    <div class="col pl-1">
+							    	<input type="button" value="Clear" class="btn btn-sm btn-secondary btn-block mt-3 m-0" onclick="resetForm();">
 							    </div>
-							    <div class="col">
-							    	<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-sm btn-primary btn-block mt-3">
+							    <div class="col pr-1">
+							    	<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-sm btn-primary btn-block mt-3" >
 								</div>							    
 							  </div>
 							</div>		 
@@ -89,7 +89,7 @@ function resetForm() {
 					
 					
 				</div>
-				<div id="divInquirysGrid" class="shadow-lg p-3 mb-5 bg-white rounded" >
+				<div id="divInquirysGrid" class="shadow-lg px-3 pt-3 mb-5 bg-white rounded offset-md-1" >
 						<%
 						PowerInterruption inquiryObj = new PowerInterruption();
 						out.print(inquiryObj.readPowerInterruption());
