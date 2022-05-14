@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import com.PowerInterruption;
 
 /**
  * Servlet implementation class PowerInterruptionsAPI
@@ -13,43 +17,93 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/PowerInterruptionsAPI")
 public class PowerInterruptionsAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PowerInterruptionsAPI() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+		PowerInterruption inquiryObj = new PowerInterruption();
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public PowerInterruptionsAPI()
+	{
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String output = inquiryObj.insertPowerInterruption(request.getParameter("customerName"),				
+				request.getParameter("phoneNumber"),
+				request.getParameter("inquiryType"),
+				request.getParameter("inquiryLocation"),
+				request.getParameter("remarks"));
+		
+			response.getWriter().write(output);
 	}
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException
+		{
+			Map paras = getParasMap(request);
+			String output = inquiryObj.updatePowerInterruption(paras.get("hidInquiryIDSave").toString(),
+					
+			paras.get("customerName").toString(),
+			paras.get("phoneNumber").toString(),
+			paras.get("inquiryType").toString(),
+			paras.get("inquiryLocation").toString(),
+			paras.get("remarks").toString());
+			
+			response.getWriter().write(output);
+		}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException
+		{
+			Map paras = getParasMap(request);
+			String output = inquiryObj.deletePowerInterruption(paras.get("inquiryID").toString());
+			response.getWriter().write(output);
+		}
+	
+	// Convert request parameters to a Map
+	private static Map getParasMap(HttpServletRequest request)
+	{
+		Map<String, String> map = new HashMap<String, String>();
+		
+		try
+		{
+			Scanner scanner = new Scanner(request.getInputStream(),"UTF-8");
+			String queryString = scanner.hasNext() ?
+			scanner.useDelimiter("\\A").next() : "";
+			scanner.close();
+			String[] params = queryString.split("&");
+			
+			for (String param : params)
+			{
+				
+				String[] p = param.split("=");
+				map.put(p[0], p[1]);
+				}
+				}
+		
+		catch (Exception e)
+		{
+		}
+		
+			return map;
 	}
-
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
 }
